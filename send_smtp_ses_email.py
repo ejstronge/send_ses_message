@@ -16,13 +16,9 @@ import smtplib
 import sys
 import time
 
-# XXX do need to allow outbound traffic to use this?
-
-# need to have retry logic in sending to amazon
-
 
 def get_server_reference(
-        username, smtp_password, aws_smtp_endpoint, aws_smtp_port):
+        username, smtp_password, aws_smtp_endpoint, aws_smtp_port, **kwargs):
     """
        Returns smtplib.smtp reference using the specified parameters.
        Call sendmail on the returned reference to send emails.
@@ -77,12 +73,12 @@ def main():
     message['From'] = args.from_email
     message['To'] = args.to_email
     try:
-        server = get_server_reference(*configuration_params)
+        server = get_server_reference(**configuration_params)
         server.sendmail(args.from_email, args.to_email, message.as_string())
     except smtplib.SMTPException:
         server.quit()
         time.sleep(30)
-        server = get_server_reference(*configuration_params)
+        server = get_server_reference(**configuration_params)
         server.sendmail(args.from_email, args.to_email, message.as_string())
     finally:
         server.quit()
