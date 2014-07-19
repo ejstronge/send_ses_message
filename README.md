@@ -1,7 +1,7 @@
 
 # Send SES Email
 
-# Edward Stronge <ejstronge@gmail.com>
+## Edward Stronge <ejstronge@gmail.com>
 
 Send debugging messages from Amazon EC2 instances.
 
