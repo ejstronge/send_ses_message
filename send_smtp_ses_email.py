@@ -80,8 +80,6 @@ def main():
         time.sleep(30)
         server = get_server_reference(**configuration_params)
         server.sendmail(args.from_email, args.to_email, message.as_string())
-    finally:
-        server.quit()
 
 
 if __name__ == '__main__':
