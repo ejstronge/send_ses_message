@@ -9,11 +9,21 @@
    (c) 2014, Edward J. Stronge Available under the MIT License - see LICENSE
    for details.
 """
+
+import sys
+
+PYTHON2 = sys.version_info.major == 2
+
 import argparse
-import ConfigParser
+
+if PYTHON2:
+    import ConfigParser
+    configparser = ConfigParser
+else:
+    import configparser
+
 from email.mime.text import MIMEText
 import smtplib
-import sys
 import time
 
 
@@ -42,7 +52,7 @@ def get_smtp_parameters(config_file_sequence):
        and return a dictionary of the parameter specified
        in their 'default' section.
     """
-    config_parser = ConfigParser.SafeConfigParser()
+    config_parser = configparser.SafeConfigParser()
     config_parser.read(config_file_sequence)
     return {i[0].lower(): i[1] for i in config_parser.items('default')}
 
