@@ -6,3 +6,8 @@
 # Python
 *.pyc
 __pycache__
+
+# Pypi
+dist/*
+send_ses_message.egg-info/
+
